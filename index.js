@@ -1,10 +1,11 @@
 // index.js (Corrected Order)
 
+require("dotenv/config");
 const { error } = require('console');
 const express = require('express');
 const fs = require("node:fs");
-const { BOOKS } = require('./models/books');
 const bookrouter = require('./routes/bookroutes');
+const authorrouter = require('./routes/authorroutes')
 const { loggermiddleware } = require('./middlewares/logger');
 const app = express();
 const port = 3000;
@@ -25,6 +26,7 @@ app.use(function (req, res, next) {
 
 // 3. Routers (NOW req.body is defined for all book routes)
 app.use('/books', bookrouter)
+app.use('/authors', authorrouter)
 app.use('/', router)
 
 router.use('/books', (req, res, next) => {
